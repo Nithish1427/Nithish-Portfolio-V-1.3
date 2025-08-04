@@ -811,3 +811,27 @@ body.dark-mode .view-project-btn:hover {
 body, .navbar, .skill-card, .project-card, .contact, .footer {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
+
+/* Remove transparent effect for navbar dropdown in mobile view */
+@media (max-width: 991px) {
+    #mainNav .navbar-collapse {
+        border: 1.4px solid olivedrab;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        background-color: transparent !important; /* Match navbar color */
+        backdrop-filter: 30px !important; /* Remove blur */
+    }
+
+    #mainNav .nav-link {
+        color: rgb(86, 118, 23) !important; /* Keep text visible */
+    }
+
+    #mainNav .btn-darkmode {
+        color: rgb(86, 118, 23) !important; /* Keep text visible */
+    }
+
+    /* Dark mode support */
+    body.dark-mode #mainNav .navbar-collapse {
+        background-color: #2e2e2e !important;
+    }
+}
