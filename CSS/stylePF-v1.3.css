@@ -15,6 +15,9 @@ body {
     color: var(--text-dark);
     scroll-behavior: smooth;
 }
+.navbar {
+    max-height: 80px;
+}
 
 nav {
     background-color: var(--bg-white);
