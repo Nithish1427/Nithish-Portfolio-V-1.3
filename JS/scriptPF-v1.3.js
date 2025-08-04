@@ -142,11 +142,6 @@ document.addEventListener("DOMContentLoaded", function () {
     emailjs.init("Ny2megAPBQySqoLEW"); // Your Public Key
 })();
 
-// Initialize EmailJS
-(function() {
-    emailjs.init("Ny2megAPBQySqoLEW"); // Your Public Key
-})();
-
 // Handle Contact Form Submission
 document.getElementById("contact-form").addEventListener("submit", function(event) {
     event.preventDefault();
