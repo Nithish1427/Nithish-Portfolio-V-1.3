@@ -60,3 +60,8 @@ document.addEventListener("DOMContentLoaded", () => {
 if ('scrollRestoration' in history) {
     history.scrollRestoration = 'manual';
 }
+
+AOS.init({
+    duration: 1000, // animation duration in ms
+    once: true,     // animation runs only once when scrolled into view
+});
