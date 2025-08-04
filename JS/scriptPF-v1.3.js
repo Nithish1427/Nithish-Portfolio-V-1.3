@@ -137,6 +137,45 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+// Initialize EmailJS
+(function() {
+    emailjs.init("Ny2megAPBQySqoLEW"); // Your Public Key
+})();
+
+// Initialize EmailJS
+(function() {
+    emailjs.init("Ny2megAPBQySqoLEW"); // Your Public Key
+})();
+
+// Handle Contact Form Submission
+document.getElementById("contact-form").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    let formMessage = document.getElementById("form-message");
+    formMessage.innerHTML = ""; // Clear old messages
+
+    // Send form data to EmailJS
+    emailjs.sendForm("service_d81azc1", "template_zw03fqu", this)
+        .then(function() {
+            formMessage.innerHTML = `<div class="success-message">✅ Your message has been sent successfully!</div>`;
+            document.getElementById("contact-form").reset();
+            fadeOutMessage(formMessage); // Only success fades out
+        }, function(error) {
+            console.error("❌ Failed to send message:", error);
+            formMessage.innerHTML = `<div class="error-message">❌ Oops! Something went wrong. Please try again.</div>`;
+            // ❌ No fade-out for errors
+        });
+});
+
+// Fade-out effect for success messages
+function fadeOutMessage(element) {
+    setTimeout(() => {
+        element.style.transition = "opacity 0.8s ease";
+        element.style.opacity = "0";
+        setTimeout(() => element.innerHTML = "", 800); // Remove after fade
+    }, 5000);
+}
+
 if ('scrollRestoration' in history) {
     history.scrollRestoration = 'manual';
 }
