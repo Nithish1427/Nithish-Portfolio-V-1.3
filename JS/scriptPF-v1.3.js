@@ -57,11 +57,32 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
+window.addEventListener('scroll', function () {
+    const navbar = document.getElementById('mainNav');
+    if (window.scrollY > 50) {
+        navbar.classList.add('navbar-shrink');
+    } else {
+        navbar.classList.remove('navbar-shrink');
+    }
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+    const reveals = document.querySelectorAll(".reveal");
+
+    const revealOnScroll = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("active");
+                observer.unobserve(entry.target); // Trigger only once
+            }
+        });
+    }, { threshold: 0.1 });
+
+    reveals.forEach(reveal => {
+        revealOnScroll.observe(reveal);
+    });
+});
+
 if ('scrollRestoration' in history) {
     history.scrollRestoration = 'manual';
 }
-
-AOS.init({
-    duration: 1000, // animation duration in ms
-    once: true,     // animation runs only once when scrolled into view
-});
