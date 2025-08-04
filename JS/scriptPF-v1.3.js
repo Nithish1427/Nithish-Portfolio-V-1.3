@@ -33,6 +33,16 @@ document.addEventListener("DOMContentLoaded", () => {
     typeTitle();
 });
 
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".skill-card .card-title").forEach(title => {
+        const text = title.textContent.trim();
+        // Check if it's a single word AND longer than 8 characters
+        if (!text.includes(" ") && text.length > 8) {
+            title.classList.add("long-title");
+        }
+    });
+});
+
 document.querySelectorAll('.read-more-btn').forEach(button => {
     button.addEventListener('click', function () {
         const description = this.closest('.project-info').querySelector('.project-description');
@@ -47,15 +57,37 @@ document.querySelectorAll('.read-more-btn').forEach(button => {
     });
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-    document.querySelectorAll(".skill-card .card-title").forEach(title => {
-        const text = title.textContent.trim();
-        // Check if it's a single word AND longer than 8 characters
-        if (!text.includes(" ") && text.length > 8) {
-            title.classList.add("long-title");
-        }
-    });
-});
+// function fetchGitHubStats(username, repo, starsEl, forksEl, langEl) {
+//     // Fetch general repo details
+//     fetch(`https://api.github.com/repos/${username}/${repo}`)
+//         .then(res => res.json())
+//         .then(data => {
+//             document.querySelector(starsEl).textContent = data.stargazers_count ?? 0;
+//             document.querySelector(forksEl).textContent = data.forks_count ?? 0;
+//         })
+//         .catch(() => {
+//             document.querySelector(starsEl).textContent = "0";
+//             document.querySelector(forksEl).textContent = "0";
+//         });
+
+//     // Fetch all languages used
+//     fetch(`https://api.github.com/repos/${username}/${repo}/languages`)
+//         .then(res => res.json())
+//         .then(langData => {
+//             const languages = Object.keys(langData);
+//             document.querySelector(langEl).textContent = languages.length ? languages.join(", ") : "N/A";
+//         })
+//         .catch(() => {
+//             document.querySelector(langEl).textContent = "N/A";
+//         });
+// }
+
+// // Call for each project
+// fetchGitHubStats("Nithish1427", "springboot-taskmanager", "#task-manager-stars", "#task-manager-forks", "#task-manager-lang");
+// fetchGitHubStats("Nithish1427", "College-Event-Hub", "#college-event-hub-stars", "#college-event-hub-forks", "#college-event-hub-lang");
+// fetchGitHubStats("Nithish1427", "quizN", "#quizN-stars", "#quizN-forks", "#quizN-lang");
+// fetchGitHubStats("Nithish1427", "Nithish-Portfolio-V-1.3", "#portfolio-stars", "#portfolio-forks", "#portfolio-lang");
+
 
 window.addEventListener('scroll', function () {
     const navbar = document.getElementById('mainNav');
