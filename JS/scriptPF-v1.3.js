@@ -116,34 +116,34 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-    const toggleBtn = document.getElementById('darkModeToggle');
-    const currentMode = localStorage.getItem('theme');
+    const toggleSwitch = document.getElementById("darkModeToggle");
+    const switchLabel = toggleSwitch.querySelector(".switch-label");
+    const body = document.body;
 
-    if (currentMode === 'dark') {
-        document.body.classList.add('dark-mode');
-        toggleBtn.textContent = '☀️ Day';
+    // Load saved mode
+    if (localStorage.getItem("theme") === "dark") {
+        body.classList.add("dark-mode");
+        toggleSwitch.classList.add("active");
+        switchLabel.textContent = "Off";
     }
 
-    toggleBtn.addEventListener('click', () => {
-        document.body.classList.toggle('dark-mode');
+    toggleSwitch.addEventListener("click", () => {
+        toggleSwitch.classList.toggle("active");
+        body.classList.toggle("dark-mode");
 
-        if (document.body.classList.contains('dark-mode')) {
-            localStorage.setItem('theme', 'dark');
-            toggleBtn.textContent = '☀️ Day';
-        } else {
-            localStorage.setItem('theme', 'light');
-            toggleBtn.textContent = '🌙 Night';
-        }
+        const isDark = body.classList.contains("dark-mode");
+        switchLabel.textContent = isDark ? "Off" : "On";
+        localStorage.setItem("theme", isDark ? "dark" : "light");
     });
 });
 
 // Initialize EmailJS
-(function() {
+(function () {
     emailjs.init("Ny2megAPBQySqoLEW"); // Your Public Key
 })();
 
 // Handle Contact Form Submission
-document.getElementById("contact-form").addEventListener("submit", function(event) {
+document.getElementById("contact-form").addEventListener("submit", function (event) {
     event.preventDefault();
 
     let formMessage = document.getElementById("form-message");
@@ -151,11 +151,11 @@ document.getElementById("contact-form").addEventListener("submit", function(even
 
     // Send form data to EmailJS
     emailjs.sendForm("service_d81azc1", "template_zw03fqu", this)
-        .then(function() {
+        .then(function () {
             formMessage.innerHTML = `<div class="success-message">✅ Your message has been sent successfully!</div>`;
             document.getElementById("contact-form").reset();
             fadeOutMessage(formMessage); // Only success fades out
-        }, function(error) {
+        }, function (error) {
             console.error("❌ Failed to send message:", error);
             formMessage.innerHTML = `<div class="error-message">❌ Oops! Something went wrong. Please try again.</div>`;
             // ❌ No fade-out for errors
